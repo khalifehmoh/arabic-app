@@ -1,0 +1,86 @@
+body{
+	direction:ltr;
+	text-align: left;
+}
+.btn-search {
+	float: right;
+}
+.btn-search {
+	padding-right: 39px;
+	padding-left: 10px;
+}
+.services-list .col-sm-3 {
+    float: left;
+}
+#recent-scholars .popup-box {
+    direction: ltr;
+}
+#recent-scholars .pop_up_text {
+    padding-left: 30px;
+    margin-bottom: 50px;
+    padding-right: unset;
+    margin-bottom: unset;
+}
+.popup_content {
+    border-left: 1px red solid;
+    padding-left: 15px;
+    padding-right: unset;
+    border-right: unset;
+	text-align: left;
+}
+.story .inside {
+    left: -70px;
+    right: unset;
+}
+.story .inside .icon {
+    left: 95px;
+	right: unset;
+}
+.story .inside:hover {
+	left: 0px;
+}
+.story .inside .story_contents {
+    text-align: left;
+}
+.btn-search {
+    padding-right: 39px;
+    padding-left: 39px;
+}
+.mobile-home-list {
+    text-align: left;
+}
+blockquote {
+    float: left;
+}
+.all_list-header select {
+	background: none !important;
+ }
+.single_page{
+	direction: rtl;
+	text-align: right;
+ }
+.universities_search_box{
+	float: left;
+	margin-left: 350px;
+	margin-right: unset;
+ }
+
+@media (min-width: 768px){
+	.navbar-nav {
+		float: left;
+	}
+}
+.navbar-header {
+    float: right;
+}
+.navbar-nav .dropdown-menu {
+    text-align: left;
+	min-width: 180px;
+}
+.notifications-wrapper, .notification-heading {
+    text-align: left;
+}
+.profile-dropdown .dropdown-menu {
+    left: 20% !important;
+}
+

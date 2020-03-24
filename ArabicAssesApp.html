@@ -1,0 +1,398 @@
+<html oncopy="return false" oncut="return false" onpaste="return false">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no">
+	<meta name="keywords" content="">
+
+	<meta property="fb:pages" content="221965491295323" />
+
+	<title>
+		English Assesment &#8211; LookinMENA </title>
+
+	<!-- FAVICON AND APPLE TOUCH -->
+	<link rel="shortcut icon" href="https://lookinmena.com/wp-content/themes/lookinmena/assets/images/favicon.png">
+
+	<!-- FONTS -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic">
+
+
+	<!-- ALL NORMAL STYLES IN LIM -->
+	<link rel="stylesheet"
+		href="https://lookinmena.com/wp-content/themes/lookinmena/assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
+	<link rel="stylesheet"
+		href="https://lookinmena.com/wp-content/themes/lookinmena/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="./assets/fonts/fontawesome/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet"
+		href="https://lookinmena.com/wp-content/themes/lookinmena/assets/fonts/fontawesome/css/font-awesome.min.css"> -->
+	<link rel="stylesheet"
+		href="https://lookinmena.com/wp-content/themes/lookinmena/assets/plugins/fancybox/jquery.fancybox.css">
+	<link rel="stylesheet"
+		href="https://lookinmena.com/wp-content/themes/lookinmena/assets/plugins/animations/animate.min.css">
+	<link rel="stylesheet" href="./assets/css/custom.css">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113878674-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-113878674-1');
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+
+	<script type="text/javascript"
+		src="https://lookinmena.com/wp-content/themes/lookinmena/assets/js/mini_lib.js?v1.07"></script>
+	<script type="text/javascript"
+		src="https://lookinmena.com/wp-content/themes/lookinmena/assets/js/mini_app.js?v1.12"></script>
+	<script type="text/javascript" src="./assets/js/english_assesment.js"></script>
+</head>
+
+<body class="sticky-header header-white scrollbar_style" ng-app="lim" id="scrollbar_style">
+	<div id="main-container" ng-controller="main_controller">
+
+		<!-- HEADER -->
+		<header id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1">
+						<a href="https://lookinmena.com">
+							<img src="https://lookinmena.com/wp-content/themes/lookinmena/assets/images/logo-dark.png">
+						</a>
+					</div>
+					<div class="col-lg-11">
+						<nav>
+							<a id="mobile-menu-button" class="waves" href="#"><i class="fa fa-angle-down"></i></a>
+							<ul class="menu clearfix" id="menu">
+
+								<li class="login" ng-if="!is_logged_in">
+									<a id="sign_in" class="btn bordered" href="#login-form-container">حسابك</a>
+									<div id="login-form-container">
+										<h4 style="box-shadow: 0px 2px 5px 1px grey; background-color: #002626">إنشاء
+											حساب مجاني</h4>
+										<form class="login-form">
+											<fieldset>
+												<h5>عند إنشاء حساب سيصبح بإمكانك</h5><br>
+												<div class="row">
+													<div class="col-sm-6">
+														<div class="bell-style"><i class="fa fa-bell"></i></div>
+														<h6 class="h6h6">تحديد الاشعارات التي ترغب باستلامها</h6>
+													</div>
+													<div class="col-sm-6">
+
+														<div class="pointer-style"><i class="fa fa-mouse-pointer"></i>
+														</div>
+														<h6 class="h6h6">معرفة طريقة المشاركة بالفرص التعليمية
+															والترفيهية </h6>
+													</div>
+												</div>
+												<div class="loglog">
+													<button class="btn btn-default-1 waves fbColor" ng-click="fb_log()">
+														أنشئ حساباً عن طريق
+														الفيسبوك <i class="fa fa-facebook"></i></button>
+													<button class="btn btn-default-1 waves gmColor" ng-click="gm_log()"
+														style="background-color: #bb4232;"> أنشئ حساباً عن طريق الجيميل
+														<i class="fa fa-google"></i></button>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+									<!-- login-form-container -->
+								</li>
+
+								<!--profile dropdown-->
+								<li class="profile-dropdown" ng-if="is_logged_in">
+
+									<button class="btn btn-default-1 waves" type="button" data-toggle="dropdown"><img
+											style="width: 50px;" ng-src="{{user_pic}}"> {{user_name}}
+									</button>
+									<ul class="dropdown-menu">
+										<li><a href="/profile">حسابك</a>
+										</li>
+										<li><a class="hand" ng-click="logout_user()">تسجيل الخروج</a>
+										</li>
+									</ul>
+								</li>
+
+								<!--notifications dropdown-->
+								<li class="notification-dropdown" ng-if="is_logged_in">
+									<button class="btn btn-default-1 waves" id="dLabel" role="button"
+										data-toggle="dropdown" data-target="#" href="/page.html" ng-click="view_noti()">
+										<i class="red_bill" aria-hidden="true"
+											ng-class="{'fa fa-bell-o':unseen_noti == 0, 'fa fa-bell':unseen_noti != 0}">{{unseen_noti != 0?unseen_noti:''}}</i>
+									</button>
+
+									<ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel"
+										style="height: 450px;">
+										<div class="notification-heading">
+											<h5 class="menu-title">اشعارات</h5>
+										</div>
+										<li class="divider"></li>
+										<div id="scrollbar_style" class="notifications-wrapper"
+											style="overflow: auto;height: 85%">
+											<div ng-repeat="noti in user_notifications | orderBy: 'post_created': true"
+												ng-class="{'not_opened': noti.post_opened == 0}">
+												<a href="{{noti.post_link}}" ng-click="open_noti(noti, $index)">
+													<div class="notification-item">
+														<span class="item-title" ng-bind-html="noti.post_title"></span>
+														<small>({{noti.post_type}})</small>
+													</div>
+												</a>
+												<li class="divider"></li>
+
+											</div>
+
+										</div>
+									</ul>
+								</li>
+
+								<li class="aa" ng-click="get_all_posts()" ng-show="!get_all_posts_clicked"> <a><i
+											class="fa fa-search"></i></a>
+
+									<!--search button-->
+								<li class="search" ng-show="get_all_posts_clicked"> <a href="#search-form-container"><i
+											class="fa fa-search"></i></a>
+									<div id="search-form-container">
+										<div id="posts_search">
+											<input class="typeahead searchcustomeinput"
+												placeholder="عن ماذا تبحث اليوم؟">
+										</div>
+										<!--</form>-->
+									</div>
+									<!-- search-form-container -->
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</header>
+		<!-- HEADER -->
+		<style type="text/css">
+			.story {
+				height: auto;
+			}
+
+			.js-container {
+				background: rgba(255, 255, 255, 0.75);
+			}
+
+			input[type=radio] {
+				margin: -4px 0 0;
+				margin-top: 1px\9;
+				line-height: normal;
+			}
+
+			.js-radio-choice {
+				margin-right: 10px !important;
+			}
+
+			button:hover,
+			input[type="reset"]:hover,
+			input[type="submit"]:hover,
+			input[type="button"]:hover {
+				background-color: #429393;
+			}
+
+			a {
+				color: #429393;
+				text-decoration: underline
+			}
+
+			body {
+				background: url(../wp-content/themes/lookinmena/assets/images/back-english.png) repeat 0 0;
+				animation: slide 45s linear infinite;
+			}
+
+			.home-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 35px 0;
+				/* height: 100% */
+			}
+
+			.home-sub-con {
+				padding: 0 75px;
+				width: 100%;
+			}
+
+			.btn-asses-submit,
+			.js-choice-submit-button {
+				width: 150px;
+				border-radius: 25px;
+			}
+
+			.js-question-page {
+				align-items: flex-start;
+			}
+
+			.js-question-text {
+				text-align: center;
+			}
+
+			.btn-english-start {
+				width: 100%
+			}
+
+			.js-nav-box {
+				width: 100%;
+			}
+
+			.col-sm-6 {
+				text-align: center;
+			}
+
+			p {
+				margin: 0px;
+			}
+
+			h1,
+			h2 {
+				color: #429393;
+				margin-top: 25px;
+				line-height: 40px;
+			}
+
+			button {
+				margin-top: 25px;
+			}
+		</style>
+
+		<!-- test-->
+		<div class="body_view english_view">
+			<!-- PAGE CONTENT -->
+			<div id="page-search" ng-controller="profiles_uni_controller">
+				<div class="js-container english-main-con">
+
+					<!--home page-->
+					<div class="home-container">
+						<div class="row home-sub-con">
+							<div class="col-sm-6">
+								<img class="img-main-image" src="./assets/images/big_logo_test.png"
+									alt="LookInMENA logo">
+							</div>
+							<div class="col-sm-6">
+								<h1 class="home-header tertiary-color">English Proficiency Assessment</h1>
+								<h3 class="home-header-arabic prime-color">اختبار قياس الكفاءة باستعمال اللغة الانكليزية
+								</h3>
+								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
+								<p class="home-header-arabic-desc" style="direction: rtl;">يتكون من ١٠٠ سؤال من متعدد
+									متنوعين بالصعوبة, وعند
+									الانتهاء من الاختبار سنقدم لكم نصائح لتطوير لغتكم بناءً على درجة التقييم التي
+									ستحصلون عليها.<br>
+									الاختبار متجدد، أي أنه يتم عرض أسئلة جديدة دائماً عند إعادة الاختبار.
+									<br>
+									ليس هناك تقييد بالوقت، وإنما يتم عرض الوقت الذي استغرقتموه في النهاية.</p>
+								<button type="submit" class="btn-test btn-asses-submit btn-english-start">
+									<span class="questions-loading">
+										<div class="lds-facebook">
+											<div></div>
+											<div></div>
+											<div></div>
+										</div>
+										Please wait until we get your questions ready...
+									</span>
+								</button>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<!-- FOOTER CONTAINER -->
+	<footer id="footer-container" class="footer_view">
+		<div id="footer-top" style="display: none;">
+			<div class="container">
+				<div class="col-sm-12">
+					<ul class="footer-menu">
+						<li><a href="#home">شركائنا</a></li>
+						<li><a href="#">مقالات</a></li>
+						<li> <a href="#">لمحة عن المشروع</a></li>
+						<li> <a href="#">فريق العمل</a></li>
+						<li> <a href="#addcontent" class="fancybox-addcontent">اضف خبرا </a></li>
+						<li> <a href="#">تسجيل دخول</a> </li>
+					</ul>
+					<!-- widget-text -->
+
+				</div>
+			</div>
+			<!-- container -->
+
+
+		</div>
+		<div id="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<center>
+						<div class="widget widget-social">
+							<div class="social-media text-center"> <a class="facebook"
+									href="https://www.facebook.com/lookinmena/" target="_blank"><i
+										class="fa fa-facebook"></i></a> <a class="twitter"
+									href="https://twitter.com/lookinmena/" target="_blank"><i
+										class="fa fa-twitter"></i></a> </div>
+							<!-- social-media -->
+
+						</div>
+					</center>
+					<!-- widget-social -->
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="widget widget-text">
+							<div class="text-center">
+								<h4>
+									<center>
+										LookinMENA
+									</center>
+								</h4>
+								<p><small>2018 &copy; All rights reserved</small></p>
+							</div>
+						</div>
+						<!-- widget-text -->
+
+					</div>
+					<!-- col -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+
+		</div>
+		<!-- footer-bottom -->
+
+	</footer>
+	<!-- FOOTER CONTAINER -->
+
+	</div>
+	<!-- MAIN CONTAINER -->
+
+	<!-- LOADING CIRCLE -->
+	<div class="loading">
+		<div id="loading-img"></div>
+	</div>
+
+	<!-- SCROLL UP -->
+	<a id="scroll-up" class="waves"><i class="fa fa-angle-up"></i></a>
+
+	<!-- MINIFIED SCRIPTS IN LIM -->
+
+
+</body>
+
+</html>

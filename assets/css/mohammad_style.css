@@ -1,0 +1,247 @@
+#overlay{
+    display:none;
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+#overlay-loading{
+    width: 100%;
+    height: 100%;
+    background:url(https://lookinmena.com/wp-content/themes/lookinmena/assets/images/loading.gif) center center no-repeat;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.user_img{
+    max-width: 40px;
+    height: auto;
+}
+
+#init_alarm{
+    display: none;
+    margin: 200px;
+    font-size: 18px;
+}
+
+.hand{
+    cursor: pointer !important;
+}
+
+.not_opened{
+    background-color: #edf2fa;
+}
+
+.tt-selectable{
+    cursor: pointer;
+}
+
+.scrollbar{
+    margin-left: 30px;
+    float: left;
+    height: 300px;
+    width: 65px;
+    background: #F5F5F5;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+
+#scrollbar_style::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#scrollbar_style::-webkit-scrollbar{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#scrollbar_style::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #627077;
+}
+
+.zoom_in{
+    cursor: zoom-in;
+}
+
+.m-t-0{margin-top:0px;}
+.m-t-5{margin-top:5px;}
+.m-t-10{margin-top:10px;}
+.m-t-40{margin-top:40px;}
+.m-t-30{margin-top:30px;}
+.m-t-25{margin-top:25px;}
+.m-t-20{margin-top:20px;}
+.m-b-5{margin-bottom:5px;}
+.m-b-10{margin-bottom:10px;}
+.m-b-20{margin-bottom:20px;}
+.m-b-30{margin-bottom:30px;}
+.m-b-40{margin-bottom:40px !important;}
+.m-t-10{margin-top:10px;}
+.m-b-10{margin-bottom:10px;}
+
+.m-l-5{margin-left:5px;}
+.m-l-10{margin-left:10px;}
+.m-l-15{margin-left:15px;}
+.m-l-20{margin-left:20px;}
+.m-l-30{margin-left:30px;}
+.m-l-40{margin-left:40px;}
+.m-l-50{margin-left:50px;}
+.m-r-0{margin-right:0px;}
+.m-r-10{margin-right:10px;}
+.m-r-15{margin-left:15px;}
+.m-r-20{margin-right:20px;}
+.m-r-30{margin-right:30px;}
+.m-r-40{margin-right:40px;}
+.m-r-50{margin-right:50px;}
+
+.m-l-0{margin-left:0;}
+.m-r-0{margin-right:0;}
+
+.p-l-0{padding-left:0;}
+.p-r-0{padding-right:0;}
+.p-t-5{padding-top:5px;}
+.p-l-10{padding-left:10px;}
+.p-r-10{padding-right:10px;}
+.p-l-20{padding-left:20px;}
+.p-l-22{padding-left:22px;}
+.p-l-30{padding-left:30px;}
+.p-l-40{padding-left: 40px;}
+.p-r-40{padding-right: 40px;}
+.p-t-5{padding-top:5px;}
+.p-t-10{padding-top:10px;}
+.p-b-5{padding-bottom:5px;}
+
+.p-5{padding: 5px;}
+.p-10{padding: 10px;}
+
+
+.btn_clk {
+    background-color: #dc4e4e !important;
+}
+
+.city_selected {
+    background-color: #39D2B4 !important;
+}
+
+.schol_selected {
+    background-color: #39D2B4 !important;
+}
+
+.blog-article-details{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* share button*/
+@import '//codepen.io/chrisdothtml/pen/ojLzJK.css';
+.social-btns .btn,
+.social-btns .btn:before,
+.social-btns .btn .fa {
+  transition: all 0.35s;
+  transition-timing-function: cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.social-btns .btn:before {
+  top: 90%;
+  left: -110%;
+}
+.social-btns .btn .fa {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+.social-btns .btn.facebook:before {
+  background-color: #3b5998;
+}
+.social-btns .btn.facebook .fa {
+  color: #3b5998;
+}
+.social-btns .btn.twitter:before {
+  background-color: #3cf;
+}
+.social-btns .btn.twitter .fa {
+  color: #3cf;
+}
+.social-btns .btn.google:before {
+  background-color: #dc4a38;
+}
+.social-btns .btn.google .fa {
+  color: #dc4a38;
+}
+.social-btns .btn.whatsapp:before {
+  background-color: #34af23;
+}
+.social-btns .btn.whatsapp .fa {
+  color: #34af23;
+}
+.social-btns .btn.linkedin:before {
+  background-color: #0077B5;
+}
+.social-btns .btn.linkedin .fa {
+  color: #0077B5;
+}
+.social-btns .btn.telegram:before {
+  background-color: #00aff0;
+}
+.social-btns .btn.telegram .fa {
+  color: #00aff0;
+}
+.social-btns .btn:focus:before,
+.social-btns .btn:hover:before {
+  top: -10%;
+  left: -10%;
+}
+.social-btns .btn:focus .fa,
+.social-btns .btn:hover .fa {
+  color: #fff;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.social-btns {
+  /* height: 90px; */
+  margin: auto;
+  font-size: 0;
+}
+.social-btns .btn {
+  display: inline-block;
+  background-color: #fff;
+  width: 95px;
+  height: 50px;
+  line-height: 90px;
+  margin: 5px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /* border-radius: 17%; */
+  box-shadow: 0 5px 15px -5px rgba(0,0,0,0.1);
+  opacity: 0.99;
+}
+.social-btns .btn:before {
+  content: '';
+  width: 176%;
+  height: 180%;
+  position: absolute;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(30deg);
+}
+.social-btns .btn .fa {
+  font-size: 38px;
+  vertical-align: middle;
+}
+
+.f-13{
+  font-size: 13px !important;
+}
