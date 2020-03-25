@@ -53,7 +53,28 @@
 		src="https://lookinmena.com/wp-content/themes/lookinmena/assets/js/mini_lib.js?v1.07"></script>
 	<script type="text/javascript"
 		src="https://lookinmena.com/wp-content/themes/lookinmena/assets/js/mini_app.js?v1.12"></script>
-	<script type="text/javascript" src="./assets/js/english_assesment.js"></script>
+	<script type="text/javascript" src="./assets/js/arabic_assesment.js"></script>
+	<script charset="UTF-8">
+		var globalData = [];
+
+		// function get_data() {
+		// 	$.ajax({
+		// 		url: "<?php echo admin_url('admin-ajax.php'); ?>",
+		// 		data: {
+		// 			'action': 'get_arabic_questions'
+		// 		},
+		// 		type: 'POST', // POST
+		// 		success: function (data) {
+		// 			globalData = data;
+		// 			$('.btn-english-start').prop("disabled", true);
+		// 			$('.btn-english-start').removeAttr("disabled");
+		// 			$('.btn-english-start').html('Start')
+		// 		}
+		// 	});
+		// }
+		window.onload = get_data()
+
+	</script>
 </head>
 
 <body class="sticky-header header-white scrollbar_style" ng-app="lim" id="scrollbar_style">
@@ -270,7 +291,7 @@
 		</style>
 
 		<!-- test-->
-		<div class="body_view english_view">
+		<div class="body_view arabic_view">
 			<!-- PAGE CONTENT -->
 			<div id="page-search" ng-controller="profiles_uni_controller">
 				<div class="js-container english-main-con">
@@ -283,9 +304,9 @@
 									alt="LookInMENA logo">
 							</div>
 							<div class="col-sm-6">
-								<h1 class="home-header tertiary-color">English Proficiency Assessment</h1>
-								<h3 class="home-header-arabic prime-color">اختبار قياس الكفاءة باستعمال اللغة الانكليزية
-								</h3>
+								<h1 class="home-header prime-color">اختبار قياس كفاءة اللغة العربية</h1>
+								<!-- <h3 class="home-header-arabic prime-color">اختبار قياس الكفاءة باستعمال اللغة الانكليزية -->
+								<!-- </h3> -->
 								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
 								<p class="home-header-arabic-desc" style="direction: rtl;">يتكون من ١٠٠ سؤال من متعدد
 									متنوعين بالصعوبة, وعند

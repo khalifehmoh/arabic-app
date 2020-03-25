@@ -116,11 +116,11 @@ var incrementTotalMark = function () {
 var renderMainDetails = function (state) {
   // var perc = state.lastRenderedQuestion - 10;
   var questionsPageRender = `<div id="questions-form" class="js-question-page">
-    <h2 class="js-q-header tertiary-color">English Assessment</h2>
+    <h2 class="js-q-header tertiary-color">إختبار اللغة العربية</h2>
     <div class="bar-con">
       <div class="bar-sub-con">
-        <span style="width:100%; text-align: left;">Progress:</span>
-        <div id="bar1" class="barfiller">
+        <span style="width:100%; text-align: right;">:نسبة الإنجاز</span>
+        <div id="bar1" style="direction:rtl" class="barfiller">
           <div class="tipWrap">
             <span class="tip"></span>
           </div>
@@ -138,14 +138,11 @@ var renderMainDetails = function (state) {
 
 var renderQuestion = function (state) {
   var checkLastAnswer = function () {
-    return `< button type = "submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">Next</button>`
-  }
-  var checkLastAnswer = function () {
     if (state.lastRenderedQuestion >= state.totalQuestions) {
-      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button js-view-result\">Show Result</button>`
+      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button js-view-result\">إظهار النتيجة</button>`
     }
     else {
-      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">Next</button>`
+      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">التالي</button>`
     }
   }
   let tenQuestionsDOM = '';
@@ -376,7 +373,7 @@ function handleSubmitAnswers() {
     zeroTempMark();
     $('.js-question-text').hide().fadeIn(200);
     $('.js-choices').hide().fadeIn(400).slideDown();
-    if (state.lastRenderedQuestion !== 110) {
+    if (state.lastRenderedQuestion !== 70) {
       $([document.documentElement, document.body]).animate({
         scrollTop: $("#questions-form").offset().top
       }, 1000);
@@ -826,8 +823,9 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 
 // Questions Repo
 function get_data() {
-  var data = JSON.parse(globalData);
-  state.questionsData = data;
+  // var data = JSON.parse(globalData);
+  // state.questionsData = data;
+  state.questionsData = [{ "question": { "id": "9", "title": "اخترت _____________ الصحيح", "level": "easy", "mark": null }, "answers": [{ "id": "35", "title": " الخُيار ", "question_id": "9", "isRight": "0" }, { "id": "34", "title": "الخَيار", "question_id": "9", "isRight": "0" }, { "id": "33", "title": "الخِيار", "question_id": "9", "isRight": "1" }, { "id": "36", "title": "الخَيَّار", "question_id": "9", "isRight": "0" }] }, { "question": { "id": "4", "title": "في البيت رجلان", "level": "easy", "mark": null }, "answers": [{ "id": "16", "title": "اثنتين", "question_id": "4", "isRight": "0" }, { "id": "15", "title": "اثنتان", "question_id": "4", "isRight": "0" }, { "id": "13", "title": "اثنان", "question_id": "4", "isRight": "1" }, { "id": "14", "title": "اثنين", "question_id": "4", "isRight": "0" }] }, { "question": { "id": "18", "title": "_____________ ما اسمك ", "level": "easy", "mark": null }, "answers": [{ "id": "72", "title": "!", "question_id": "18", "isRight": "0" }, { "id": "69", "title": "؟", "question_id": "18", "isRight": "1" }, { "id": "71", "title": "،", "question_id": "18", "isRight": "0" }, { "id": "70", "title": ".", "question_id": "18", "isRight": "0" }] }, { "question": { "id": "5", "title": " معي خمس ", "level": "easy", "mark": null }, "answers": [{ "id": "18", "title": "ِعِصِيّ", "question_id": "5", "isRight": "0" }, { "id": "19", "title": "عصَيَات", "question_id": "5", "isRight": "0" }, { "id": "20", "title": "sticks ", "question_id": "5", "isRight": "0" }, { "id": "17", "title": "عصَوَات", "question_id": "5", "isRight": "1" }] }, { "question": { "id": "12", "title": "جمع قول", "level": "easy", "mark": null }, "answers": [{ "id": "45", "title": "أقوال", "question_id": "12", "isRight": "1" }, { "id": "46", "title": "أقاويل", "question_id": "12", "isRight": "0" }, { "id": "47", "title": "أقاول", "question_id": "12", "isRight": "0" }, { "id": "48", "title": "مقاولات", "question_id": "12", "isRight": "0" }] }, { "question": { "id": "7", "title": "السهام _____________ ", "level": "easy", "mark": null }, "answers": [{ "id": "25", "title": "جَعْبة ", "question_id": "7", "isRight": "1" }, { "id": "26", "title": "جُعبة ", "question_id": "7", "isRight": "0" }, { "id": "27", "title": "جِعبة ", "question_id": "7", "isRight": "0" }, { "id": "28", "title": "جُعُبة", "question_id": "7", "isRight": "0" }] }, { "question": { "id": "20", "title": "_____________ نظرتُ إليه ", "level": "easy", "mark": null }, "answers": [{ "id": "80", "title": "خُلَسَةً", "question_id": "20", "isRight": "0" }, { "id": "77", "title": "خُلْسَةً", "question_id": "20", "isRight": "1" }, { "id": "78", "title": "خِلْسَةً", "question_id": "20", "isRight": "0" }, { "id": "79", "title": "خَلْسَةً", "question_id": "20", "isRight": "0" }] }, { "question": { "id": "3", "title": "الصواب", "level": "easy", "mark": null }, "answers": [{ "id": "10", "title": "الحَيَاه", "question_id": "3", "isRight": "0" }, { "id": "12", "title": "life", "question_id": "3", "isRight": "0" }, { "id": "11", "title": "الحَيَات", "question_id": "3", "isRight": "0" }, { "id": "9", "title": "الحَيَاة", "question_id": "3", "isRight": "1" }] }, { "question": { "id": "2", "title": "_____________ لم أفعل ", "level": "easy", "mark": null }, "answers": [{ "id": "8", "title": "شيء", "question_id": "2", "isRight": "0" }, { "id": "5", "title": "شيئًا", "question_id": "2", "isRight": "1" }, { "id": "7", "title": "شئًا", "question_id": "2", "isRight": "0" }, { "id": "6", "title": "شيءًا", "question_id": "2", "isRight": "0" }] }, { "question": { "id": "8", "title": "المؤسسة مجتمعون _____________ ", "level": "easy", "mark": null }, "answers": [{ "id": "30", "title": "مدراء", "question_id": "8", "isRight": "0" }, { "id": "29", "title": "مديرو", "question_id": "8", "isRight": "1" }, { "id": "31", "title": "مديري", "question_id": "8", "isRight": "0" }, { "id": "32", "title": "مُدُر", "question_id": "8", "isRight": "0" }] }, { "question": { "id": "10", "title": "أنتم", "level": "easy", "mark": null }, "answers": [{ "id": "39", "title": "مجتهدات", "question_id": "10", "isRight": "0" }, { "id": "38", "title": "مجتهدان", "question_id": "10", "isRight": "0" }, { "id": "37", "title": "مجتهدون", "question_id": "10", "isRight": "1" }, { "id": "40", "title": "مجتهدن", "question_id": "10", "isRight": "0" }] }, { "question": { "id": "16", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "62", "title": "لم أقُولْ", "question_id": "16", "isRight": "0" }, { "id": "64", "title": "لن أقولُ", "question_id": "16", "isRight": "0" }, { "id": "63", "title": "لن أقُلْ", "question_id": "16", "isRight": "0" }, { "id": "61", "title": "لم أقُلْ ", "question_id": "16", "isRight": "1" }] }, { "question": { "id": "19", "title": "مفرد أشياء", "level": "easy", "mark": null }, "answers": [{ "id": "73", "title": "شيء", "question_id": "19", "isRight": "1" }, { "id": "76", "title": "شايء", "question_id": "19", "isRight": "0" }, { "id": "75", "title": "شيئ", "question_id": "19", "isRight": "0" }, { "id": "74", "title": "شئ", "question_id": "19", "isRight": "0" }] }, { "question": { "id": "1", "title": "جمع \"سهم\" ", "level": "easy", "mark": null }, "answers": [{ "id": "3", "title": "أَسْهُم", "question_id": "1", "isRight": "0" }, { "id": "4", "title": "سُهُم", "question_id": "1", "isRight": "0" }, { "id": "1", "title": "سِهَام", "question_id": "1", "isRight": "1" }, { "id": "2", "title": "سُهُوم", "question_id": "1", "isRight": "0" }] }, { "question": { "id": "11", "title": "_____________ بينهما علاقة ", "level": "easy", "mark": null }, "answers": [{ "id": "44", "title": "حُمِّيَّة", "question_id": "11", "isRight": "0" }, { "id": "42", "title": "حَمِيمَة", "question_id": "11", "isRight": "0" }, { "id": "41", "title": "حَمِيمِيَّة", "question_id": "11", "isRight": "1" }, { "id": "43", "title": "حَمَمِيَّة", "question_id": "11", "isRight": "0" }] }, { "question": { "id": "14", "title": "شربتُ", "level": "easy", "mark": null }, "answers": [{ "id": "55", "title": "الحُساء", "question_id": "14", "isRight": "0" }, { "id": "54", "title": "الحِساء", "question_id": "14", "isRight": "0" }, { "id": "56", "title": "الحسّاء", "question_id": "14", "isRight": "0" }, { "id": "53", "title": "الحَساء", "question_id": "14", "isRight": "1" }] }, { "question": { "id": "13", "title": "حصلتُ على _____________ من العمل", "level": "easy", "mark": null }, "answers": [{ "id": "49", "title": "إجازة", "question_id": "13", "isRight": "1" }, { "id": "51", "title": "إيجازة", "question_id": "13", "isRight": "0" }, { "id": "50", "title": "أجازة", "question_id": "13", "isRight": "0" }, { "id": "52", "title": "إجازًا", "question_id": "13", "isRight": "0" }] }, { "question": { "id": "15", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "57", "title": "عمر بن الخطاب", "question_id": "15", "isRight": "1" }, { "id": "58", "title": "عمر ابن الخطاب", "question_id": "15", "isRight": "0" }, { "id": "60", "title": "عمر أبن الخطاب", "question_id": "15", "isRight": "0" }, { "id": "59", "title": "عمر إبن الخطاب", "question_id": "15", "isRight": "0" }] }, { "question": { "id": "6", "title": "أخي", "level": "easy", "mark": null }, "answers": [{ "id": "24", "title": "يفتقرني", "question_id": "6", "isRight": "0" }, { "id": "21", "title": "يفتقدني", "question_id": "6", "isRight": "1" }, { "id": "22", "title": "يفتقرّ إليّ", "question_id": "6", "isRight": "0" }, { "id": "23", "title": "يفتقد إليّ", "question_id": "6", "isRight": "0" }] }, { "question": { "id": "17", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "68", "title": "هذا مستشفى كبيرة", "question_id": "17", "isRight": "0" }, { "id": "67", "title": "هذه مستشفى كبير", "question_id": "17", "isRight": "0" }, { "id": "65", "title": "هذا مستشفى كبير", "question_id": "17", "isRight": "1" }, { "id": "66", "title": "هذه مستشفى كبيرة", "question_id": "17", "isRight": "0" }] }]
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }

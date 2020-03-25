@@ -1,4 +1,4 @@
-<?php /* Template Name: English Test*/ ?>
+<?php /* Template Name: arabic Test*/ ?>
 
 			
 <?php get_header(); ?>
@@ -9,14 +9,14 @@
 		$.ajax({
     url: "<?php echo admin_url('admin-ajax.php'); ?>",
     data: {
-      'action': 'get_questions_answers'
+      'action': 'get_arabic_questions'
     },
     type: 'POST', // POST
     success: function (data) {
 	  globalData = data;
 	  $('.btn-english-start').prop("disabled", true);
-    $('.btn-english-start').removeAttr("disabled");
-	  $('.btn-english-start').html('Start')
+      $('.btn-english-start').removeAttr("disabled");
+	  $('.btn-english-start').html('بدء الإختبار')
     }
   });
 	}
@@ -124,8 +124,8 @@
 								<img class="img-main-image" src="https://lookinmena.com/wp-content/themes/lookinmena/assets/images/big_logo_test.png" alt="LookInMENA logo">
 							</div>
 							<div class="col-sm-6">
-								<h1 class="home-header prime-color">English Proficiency Assessment</h1>
-								<h3 class="home-header-arabic tertiary-color ">اختبار قياس كفاءة اللغة الانكليزية</h3>
+								<h1 class="home-header prime-color">اختبار قياس كفاءة اللغة العربية</h1>
+								<!-- <h3 class="home-header-arabic tertiary-color ">اختبار قياس كفاءة اللغة الانكليزية</h3> -->
 								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
 								<p class="home-header-arabic-desc" style="direction: rtl;">يتكون من ١٠٠ سؤال من متعدد
 									متنوعين بالصعوبة, وعند
@@ -141,7 +141,7 @@
 											<div></div>
 											<div></div>
 										</div>
-										Please wait until we get your questions ready...
+										انتظر قليلا ريثما نجهز الأسئلة...
 									</span>
 								</button>
 							</div>
