@@ -119,7 +119,7 @@ var renderMainDetails = function (state) {
     <h2 class="js-q-header tertiary-color">إختبار اللغة العربية</h2>
     <div class="bar-con">
       <div class="bar-sub-con">
-        <span style="width:100%; text-align: right;">:نسبة الإنجاز</span>
+        <h6 style="width:100%; text-align: right;">نسبة الإنجاز:</h6>
         <div id="bar1" style="direction:rtl" class="barfiller">
           <div class="tipWrap">
             <span class="tip"></span>
@@ -151,15 +151,14 @@ var renderQuestion = function (state) {
     const formId = 'q-' + (index + 1);
     let singleQuestionDOM = `<form id="${formId}" class="js-q-box">` +
       "<div class=\"js-question-text\">" +
-      "<h5><span class=\"js-q-number\">" + item.queNumber + ": </span>" +
-      "<span class=\"js-q-text\">" + item.question + "</span></h5>" +
+      "<h5><span style=\"margin-left:5px\" class=\"js-q-number\"> :" + item.queNumber + "</span></h5>" +
+      "<h5><span class=\"js-q-text\">" + item.question + "</span></h5>" +
       "</div>" +
       "<div class=\"js-choices row\">" + item.choices +
       "</div>" +
       "</form>"
     tenQuestionsDOM += singleQuestionDOM;
   })
-
   var questionsRender = `
     ${tenQuestionsDOM}
     <div class="js-nav-box">
@@ -183,29 +182,27 @@ var renderResult = function () {
   var percentage = totalMark;
   const levelText = state.levelText;
   const feedbackSummary = state.feedbackSummary;
-
-  if (totalMark >= 83.335 && totalMark <= 100) {
-    message = "C2";
-    ringColor = "js-excellent-result";
+  const numberOfQuestions = state.questionsData.length;
+  // if (totalMark >= 83.335 && totalMark <= 100) {
+  //   ringColor = "js-excellent-result";
+  // }
+  // else if (totalMark >= 66.668 && totalMark <= 83.335) {
+  //   ringColor = "js-excellent-result";
+  // }
+  if (totalMark >= 50 && totalMark <= 38) {
+    message = "ممتاز";
+    ringColor = "js-excellent-result"
   }
-  else if (totalMark >= 66.668 && totalMark <= 83.335) {
-    message = "C1";
-    ringColor = "js-excellent-result";
-  }
-  else if (totalMark >= 50.001 && totalMark < 66.668) {
-    message = "B2";
-    ringColor = "js-verygood-result"
-  }
-  else if (totalMark >= 33.33 && totalMark < 50.001) {
-    message = "B1";
+  else if (totalMark >= 37 && totalMark < 26) {
+    message = "جيد";
     ringColor = "js-good-result"
   }
-  else if (totalMark >= 16.66 && totalMark < 33.33) {
-    message = "A2";
+  else if (totalMark >= 25 && totalMark < 13) {
+    message = "متوسط";
     ringColor = "js-average-result";
   }
-  else if (totalMark < 16.66 && totalMark >= 0) {
-    message = "A1";
+  else if (totalMark < 12 && totalMark >= 0) {
+    message = "ضعيف";
     ringColor = "js-weak-result"
   }
   addResultMessage(message);
@@ -213,7 +210,7 @@ var renderResult = function () {
 
   result = `<div class="js-result-page">
     <div class="js-feedback-text-con">
-    <span class="js-feedback-header">نتيجتك: ${totalMark}/100</span>
+    <span class="js-feedback-header">نتيجتك: ${totalMark}\\${numberOfQuestions}</span>
     <div>
       <svg viewBox="0 0 36 36" class="result-ring english-result-ring">
       <path class="ring-bg" d="M18 2.0845
@@ -226,21 +223,21 @@ var renderResult = function () {
       </svg>
     </div>
 
-    <div id="steps"></div>
-
-    <div id="result-level-text" style="text-align:center;margin: 20 0 5px">
-      <p style="font-weight: 700;font-size: 1.1em;">${levelText}</p>
-    </div>
-
     <div class="js-feedback-time-con" style="text-align:center;margin-bottom: 30px">
     <span class="js-feedback-time" style="font-size:1.15em;color: #5a5a5a;">مدة الإنهاء: ${state.testTime}</span>
+    </div>
+    <div class="js-article-text" style="margin-bottom: 52px">
+      <div class="container">
+        <h5>لمعرفة التفسير والتفاصيل للأخطاء الشائعة باللغة العربية كي تتجنبها
+        <a href="https://lookinmena.com/%d8%a7%d9%84%d8%a3%d8%ae%d8%b7%d8%a7%d8%a1-%d8%a7%d9%84%d8%b4%d8%a7%d8%a6%d8%b9%d8%a9-%d8%a8%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%b9%d8%b1%d8%a8%d9%8a%d8%a9/" target="_blank">اضغط هنا</a></h5>
+      </div>
     </div>
     <div class="js-feedback-summary-con">
       <div class="container">
         <div class="js-feedback-box" style="direction: rtl;
         text-align: right">
           <img class="js-feedback-img" src="../wp-content/themes/lookinmena/assets/images/test-grants2.svg" alt="Nasooh lookinmena mascot">
-          <h5 class="js-feedback-summary-header">نصائح العم نصوح: </h5>
+          <h5 class="js-feedback-summary-header">نصيحة العم نصوح: </h5>
           <div class="js-feedback-summary-list" style="padding: 20px 30px">${feedbackSummary}
           </div>
         </div>
@@ -402,7 +399,7 @@ function handleViewResult() {
     $('.js-question-page').fadeOut('slow', function () {
       generateFeedbackSummary();
       renderResult();
-      $('#steps').progressbar({ steps: setResultStep() });
+      // $('#steps').progressbar({ steps: setResultStep() });
       getQuestionsDetails('wrongQuestions');
       renderMistakes();
       animateResult();
@@ -411,16 +408,16 @@ function handleViewResult() {
   })
 }
 
-function setResultStep() {
-  let levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-  let resultLevel = state.result;
-  levels.forEach((level, index) => {
-    if (level === resultLevel) {
-      levels[index] = '@' + level
-    }
-  });
-  return levels
-}
+// function setResultStep() {
+//   let levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+//   let resultLevel = state.result;
+//   levels.forEach((level, index) => {
+//     if (level === resultLevel) {
+//       levels[index] = '@' + level
+//     }
+//   });
+//   return levels
+// }
 
 function handleProgressBar() {
   (function ($) {
@@ -594,48 +591,6 @@ function handleProgressBar() {
   })(jQuery);
 }
 
-function handleResultBar() {
-
-  (function ($) {
-    $.fn.progressbar = function (options) {
-
-      var opts = $.extend({}, options);
-
-      return this.each(function () {
-        var $this = $(this);
-
-        var $ul = $('<ul>').attr('class', 'progressbar');
-
-        var currentIdx = -1
-
-        $.each(opts.steps, function (index, value) {
-          var $li = $('<li>').text(value.replace('@', '').replace('~', ''));
-          $li.css('width', (100 / opts.steps.length) + '%');
-
-
-
-          if (value.indexOf('@') > -1) {
-            $li.addClass('current');
-            currentIdx = index;
-          }
-
-          if (value.indexOf('~') > -1) {
-            $li.addClass('fail');
-          }
-
-          $ul.append($li);
-        });
-
-        for (var i = 0; i < currentIdx; i++) {
-          $($ul.find('li')[i]).addClass('done');
-        }
-
-        $this.append($ul);
-      });
-    };
-  })(jQuery);
-
-}
 
 // function handleViewResult() {
 //   $(".js-container").on("click", ".js-view-result", function (event) {
@@ -655,6 +610,7 @@ function animateResult() {
   $(".js-feedback-time-con").hide();
   $(".js-feedback-summary-header").hide();
   $(".js-feedback-summary-list").hide();
+  $(".js-article-text").hide();
   $("#steps").hide();
   $("#result-level-text").hide();
   $(".js-wrong-questions").hide();
@@ -675,6 +631,7 @@ function animateResult() {
     $("#result-level-text").fadeIn(1000);
     $("#steps").fadeIn(1200);
     $(".js-feedback-time-con").fadeIn(2000);
+    $(".js-article-text").fadeIn(2200);
     $(".js-feedback-summary-con").fadeIn(1000).slideDown(2000, function () {
       $(".js-feedback-img").fadeIn(200, function () {
         $(".js-feedback-summary-header").fadeIn(200, function () {
@@ -722,52 +679,9 @@ function getQuestionsDetails(reqStateProp) {
 }
 
 function generateFeedbackSummary() {
-  const totalMark = state.totalMarks;
   let feedbackText = '';
-  if (totalMark >= 66.668 && totalMark <= 100) {
-    // "excellent-result";
-    state.levelText = 'مستواك متقدم'
-    feedbackText = `<p>كورسات مستوى متقدم من أهم منصات التعليم الأونلاين:</p>
-    <p>Coursera: <a href="https://www.coursera.org/specializations/advanced-grammar-punctuation" target="_blank">https://www.coursera.org/specializations/advanced-grammar-punctuation<br /></a>FutureLearn: <a  href="https://www.futurelearn.com/courses/english-academic-study" target="_blank">https://www.futurelearn.com/courses/english-academic-study<br /><br /></a></p>
-    <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
-    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop" target="_blank">&nbsp;من هنا</a></p>
-    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/" target="_blank">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
-
-  }
-  else if (totalMark >= 33.33 && totalMark < 66.668) {
-    // "good-result"
-    state.levelText = 'مستواك متوسط/ جيد';
-    feedbackText = `<p>ثلاث كورسات مستوى متوسط/ جيد من أهم منصات التعليم الأونلاين:</p>
-    <p>edX: <a href="https://www.edx.org/course/upper-intermediate-english-business" target="_blank"> https://www.edx.org/course/upper-intermediate-english-business</a></p>
-    <p>Coursera: <a href="https://www.coursera.org/specializations/intermediate-grammar" target="_blank"> https://www.coursera.org/specializations/intermediate-grammar<br /></a>FutureLearn: <a href=" https://www.futurelearn.com/courses/english-for-study-intermediate" target="_blank">https://www.futurelearn.com/courses/english-for-study-intermediate<br /><br /></a></p>
-    <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
-    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop" target="_blank">&nbsp;من هنا</a></p>
-    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا</a>&nbsp;</p>
-    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone" target="_blank">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone" target="_blank">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine" target="_blank">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories" target="_blank">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games" target="_blank">الألعاب</a></p>
-    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/" target="_blank">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
-
-  }
-  else if (totalMark < 33.33 && totalMark >= 0) {
-    // "weak-result"
-    state.levelText = ' مستواك مبتدئ';
-    feedbackText = `<p>ثلاث كورسات مستوى مبتدئ من أهم منصات التعليم الأونلاين:</p>
-    <p>edX: <a href="https://www.edx.org/course/english-grammar-and-style" target="_blank">https://www.edx.org/course/english-grammar-and-style</a></p>
-    <p>Coursera: <a href="https://www.coursera.org/specializations/learn-english" target="_blank">https://www.coursera.org/specializations/learn-english<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/basic-english-elementary" target="_blank">https://www.futurelearn.com/courses/basic-english-elementary<br /><br /></a></p>
-    <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
-    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
-    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop" target="_blank">&nbsp;من هنا</a></p>
-    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا</a>&nbsp;</p>
-    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone" target="_blank">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone" target="_blank">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine" target="_blank">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories" target="_blank">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games" target="_blank">الألعاب</a></p>
-    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/" target="_blank">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
-  }
+  feedbackText = `<p>من الأمور المغفَلة في التواصل الفعّال هو ارتباط المعنى بالمبنى؛ إذ إن البناء اللغوي الخاطئ للجمل والتراكيب يؤدي إلى إيصال معنى خاطئ، ومن هنا تأتي الحاجة ملحّة لإتقان لغتنا العربية من جوانبها النحوية والإملائية، وقد تكون لستَ عاملًا في المجال الأدبي أو إعداد المحتوى مثلًا لتكون مجبرًا على الكتابة بلغة سليمة تخاطب فيها جمهورك، لكنك بالطبع قارئ؛ والقراءة هنا لا تشير إلى الكتب فقط، فأنت طالب بحاجة لفهم محاضراته وأنت متابع لمدونات وصفحات عديدة على منصات التواصل الاجتماعي بحاجة للفهم الصحيح لما يمرُّ أمامك؛ مثل هذا النص تمامًا، وإن من الصور النمطية التي شيعت عن اللغة العربية بأنها معقدة وجامدة وبعيدة عن عامة الناس وذلك خاطئ تمامًا؛ إذ يمكنك عزيزي الكتابة بلغة سليمة دون إدراج أبيات من الشعر الجاهلي!
+    </p>`
   addFeedbackSummary(feedbackText);
 }
 
@@ -800,6 +714,9 @@ function generateQuestionAnswersDOM(answersArray, requiredStateProp) {
     else if (answersArray.length === 3) {
       colSize = 'col-md-4'
     }
+    else if (answersArray.length === 2) {
+      colSize = 'col-md-6'
+    }
     let answerHTML = `<div class="${colSize} col-sm-12">
     <div class="js-choice ${labelClass}" style="height: ${ansHeight}">
       <input class="js-radio-choice" type="radio" name="choice" id="${answer.id}" value="${answer.isRight}">
@@ -823,9 +740,9 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 
 // Questions Repo
 function get_data() {
-  // var data = JSON.parse(globalData);
-  // state.questionsData = data;
-  state.questionsData = [{ "question": { "id": "9", "title": "اخترت _____________ الصحيح", "level": "easy", "mark": null }, "answers": [{ "id": "35", "title": " الخُيار ", "question_id": "9", "isRight": "0" }, { "id": "34", "title": "الخَيار", "question_id": "9", "isRight": "0" }, { "id": "33", "title": "الخِيار", "question_id": "9", "isRight": "1" }, { "id": "36", "title": "الخَيَّار", "question_id": "9", "isRight": "0" }] }, { "question": { "id": "4", "title": "في البيت رجلان", "level": "easy", "mark": null }, "answers": [{ "id": "16", "title": "اثنتين", "question_id": "4", "isRight": "0" }, { "id": "15", "title": "اثنتان", "question_id": "4", "isRight": "0" }, { "id": "13", "title": "اثنان", "question_id": "4", "isRight": "1" }, { "id": "14", "title": "اثنين", "question_id": "4", "isRight": "0" }] }, { "question": { "id": "18", "title": "_____________ ما اسمك ", "level": "easy", "mark": null }, "answers": [{ "id": "72", "title": "!", "question_id": "18", "isRight": "0" }, { "id": "69", "title": "؟", "question_id": "18", "isRight": "1" }, { "id": "71", "title": "،", "question_id": "18", "isRight": "0" }, { "id": "70", "title": ".", "question_id": "18", "isRight": "0" }] }, { "question": { "id": "5", "title": " معي خمس ", "level": "easy", "mark": null }, "answers": [{ "id": "18", "title": "ِعِصِيّ", "question_id": "5", "isRight": "0" }, { "id": "19", "title": "عصَيَات", "question_id": "5", "isRight": "0" }, { "id": "20", "title": "sticks ", "question_id": "5", "isRight": "0" }, { "id": "17", "title": "عصَوَات", "question_id": "5", "isRight": "1" }] }, { "question": { "id": "12", "title": "جمع قول", "level": "easy", "mark": null }, "answers": [{ "id": "45", "title": "أقوال", "question_id": "12", "isRight": "1" }, { "id": "46", "title": "أقاويل", "question_id": "12", "isRight": "0" }, { "id": "47", "title": "أقاول", "question_id": "12", "isRight": "0" }, { "id": "48", "title": "مقاولات", "question_id": "12", "isRight": "0" }] }, { "question": { "id": "7", "title": "السهام _____________ ", "level": "easy", "mark": null }, "answers": [{ "id": "25", "title": "جَعْبة ", "question_id": "7", "isRight": "1" }, { "id": "26", "title": "جُعبة ", "question_id": "7", "isRight": "0" }, { "id": "27", "title": "جِعبة ", "question_id": "7", "isRight": "0" }, { "id": "28", "title": "جُعُبة", "question_id": "7", "isRight": "0" }] }, { "question": { "id": "20", "title": "_____________ نظرتُ إليه ", "level": "easy", "mark": null }, "answers": [{ "id": "80", "title": "خُلَسَةً", "question_id": "20", "isRight": "0" }, { "id": "77", "title": "خُلْسَةً", "question_id": "20", "isRight": "1" }, { "id": "78", "title": "خِلْسَةً", "question_id": "20", "isRight": "0" }, { "id": "79", "title": "خَلْسَةً", "question_id": "20", "isRight": "0" }] }, { "question": { "id": "3", "title": "الصواب", "level": "easy", "mark": null }, "answers": [{ "id": "10", "title": "الحَيَاه", "question_id": "3", "isRight": "0" }, { "id": "12", "title": "life", "question_id": "3", "isRight": "0" }, { "id": "11", "title": "الحَيَات", "question_id": "3", "isRight": "0" }, { "id": "9", "title": "الحَيَاة", "question_id": "3", "isRight": "1" }] }, { "question": { "id": "2", "title": "_____________ لم أفعل ", "level": "easy", "mark": null }, "answers": [{ "id": "8", "title": "شيء", "question_id": "2", "isRight": "0" }, { "id": "5", "title": "شيئًا", "question_id": "2", "isRight": "1" }, { "id": "7", "title": "شئًا", "question_id": "2", "isRight": "0" }, { "id": "6", "title": "شيءًا", "question_id": "2", "isRight": "0" }] }, { "question": { "id": "8", "title": "المؤسسة مجتمعون _____________ ", "level": "easy", "mark": null }, "answers": [{ "id": "30", "title": "مدراء", "question_id": "8", "isRight": "0" }, { "id": "29", "title": "مديرو", "question_id": "8", "isRight": "1" }, { "id": "31", "title": "مديري", "question_id": "8", "isRight": "0" }, { "id": "32", "title": "مُدُر", "question_id": "8", "isRight": "0" }] }, { "question": { "id": "10", "title": "أنتم", "level": "easy", "mark": null }, "answers": [{ "id": "39", "title": "مجتهدات", "question_id": "10", "isRight": "0" }, { "id": "38", "title": "مجتهدان", "question_id": "10", "isRight": "0" }, { "id": "37", "title": "مجتهدون", "question_id": "10", "isRight": "1" }, { "id": "40", "title": "مجتهدن", "question_id": "10", "isRight": "0" }] }, { "question": { "id": "16", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "62", "title": "لم أقُولْ", "question_id": "16", "isRight": "0" }, { "id": "64", "title": "لن أقولُ", "question_id": "16", "isRight": "0" }, { "id": "63", "title": "لن أقُلْ", "question_id": "16", "isRight": "0" }, { "id": "61", "title": "لم أقُلْ ", "question_id": "16", "isRight": "1" }] }, { "question": { "id": "19", "title": "مفرد أشياء", "level": "easy", "mark": null }, "answers": [{ "id": "73", "title": "شيء", "question_id": "19", "isRight": "1" }, { "id": "76", "title": "شايء", "question_id": "19", "isRight": "0" }, { "id": "75", "title": "شيئ", "question_id": "19", "isRight": "0" }, { "id": "74", "title": "شئ", "question_id": "19", "isRight": "0" }] }, { "question": { "id": "1", "title": "جمع \"سهم\" ", "level": "easy", "mark": null }, "answers": [{ "id": "3", "title": "أَسْهُم", "question_id": "1", "isRight": "0" }, { "id": "4", "title": "سُهُم", "question_id": "1", "isRight": "0" }, { "id": "1", "title": "سِهَام", "question_id": "1", "isRight": "1" }, { "id": "2", "title": "سُهُوم", "question_id": "1", "isRight": "0" }] }, { "question": { "id": "11", "title": "_____________ بينهما علاقة ", "level": "easy", "mark": null }, "answers": [{ "id": "44", "title": "حُمِّيَّة", "question_id": "11", "isRight": "0" }, { "id": "42", "title": "حَمِيمَة", "question_id": "11", "isRight": "0" }, { "id": "41", "title": "حَمِيمِيَّة", "question_id": "11", "isRight": "1" }, { "id": "43", "title": "حَمَمِيَّة", "question_id": "11", "isRight": "0" }] }, { "question": { "id": "14", "title": "شربتُ", "level": "easy", "mark": null }, "answers": [{ "id": "55", "title": "الحُساء", "question_id": "14", "isRight": "0" }, { "id": "54", "title": "الحِساء", "question_id": "14", "isRight": "0" }, { "id": "56", "title": "الحسّاء", "question_id": "14", "isRight": "0" }, { "id": "53", "title": "الحَساء", "question_id": "14", "isRight": "1" }] }, { "question": { "id": "13", "title": "حصلتُ على _____________ من العمل", "level": "easy", "mark": null }, "answers": [{ "id": "49", "title": "إجازة", "question_id": "13", "isRight": "1" }, { "id": "51", "title": "إيجازة", "question_id": "13", "isRight": "0" }, { "id": "50", "title": "أجازة", "question_id": "13", "isRight": "0" }, { "id": "52", "title": "إجازًا", "question_id": "13", "isRight": "0" }] }, { "question": { "id": "15", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "57", "title": "عمر بن الخطاب", "question_id": "15", "isRight": "1" }, { "id": "58", "title": "عمر ابن الخطاب", "question_id": "15", "isRight": "0" }, { "id": "60", "title": "عمر أبن الخطاب", "question_id": "15", "isRight": "0" }, { "id": "59", "title": "عمر إبن الخطاب", "question_id": "15", "isRight": "0" }] }, { "question": { "id": "6", "title": "أخي", "level": "easy", "mark": null }, "answers": [{ "id": "24", "title": "يفتقرني", "question_id": "6", "isRight": "0" }, { "id": "21", "title": "يفتقدني", "question_id": "6", "isRight": "1" }, { "id": "22", "title": "يفتقرّ إليّ", "question_id": "6", "isRight": "0" }, { "id": "23", "title": "يفتقد إليّ", "question_id": "6", "isRight": "0" }] }, { "question": { "id": "17", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "68", "title": "هذا مستشفى كبيرة", "question_id": "17", "isRight": "0" }, { "id": "67", "title": "هذه مستشفى كبير", "question_id": "17", "isRight": "0" }, { "id": "65", "title": "هذا مستشفى كبير", "question_id": "17", "isRight": "1" }, { "id": "66", "title": "هذه مستشفى كبيرة", "question_id": "17", "isRight": "0" }] }]
+  var data = JSON.parse(globalData);
+  state.questionsData = data;
+  // state.questionsData = [{ "question": { "id": "9", "title": "اخترت _____________ الصحيح", "level": "easy", "mark": null }, "answers": [{ "id": "35", "title": " الخُيار ", "question_id": "9", "isRight": "1" }, { "id": "34", "title": "الخَيار", "question_id": "9", "isRight": "0" }] }, { "question": { "id": "4", "title": "في البيت رجلان", "level": "easy", "mark": null }, "answers": [{ "id": "16", "title": "اثنتين", "question_id": "4", "isRight": "0" }, { "id": "15", "title": "اثنتان", "question_id": "4", "isRight": "0" }, { "id": "13", "title": "اثنان", "question_id": "4", "isRight": "1" }, { "id": "14", "title": "اثنين", "question_id": "4", "isRight": "0" }] }, { "question": { "id": "18", "title": "_____________ ما اسمك ", "level": "easy", "mark": null }, "answers": [{ "id": "72", "title": "!", "question_id": "18", "isRight": "0" }, { "id": "69", "title": "؟", "question_id": "18", "isRight": "1" }, { "id": "71", "title": "،", "question_id": "18", "isRight": "0" }, { "id": "70", "title": ".", "question_id": "18", "isRight": "0" }] }, { "question": { "id": "5", "title": " معي خمس ", "level": "easy", "mark": null }, "answers": [{ "id": "18", "title": "ِعِصِيّ", "question_id": "5", "isRight": "0" }, { "id": "19", "title": "عصَيَات", "question_id": "5", "isRight": "0" }, { "id": "20", "title": "sticks ", "question_id": "5", "isRight": "0" }, { "id": "17", "title": "عصَوَات", "question_id": "5", "isRight": "1" }] }, { "question": { "id": "12", "title": "جمع قول", "level": "easy", "mark": null }, "answers": [{ "id": "45", "title": "أقوال", "question_id": "12", "isRight": "1" }, { "id": "46", "title": "أقاويل", "question_id": "12", "isRight": "0" }, { "id": "47", "title": "أقاول", "question_id": "12", "isRight": "0" }, { "id": "48", "title": "مقاولات", "question_id": "12", "isRight": "0" }] }, { "question": { "id": "7", "title": "السهام _____________ ", "level": "easy", "mark": null }, "answers": [{ "id": "25", "title": "جَعْبة ", "question_id": "7", "isRight": "1" }, { "id": "26", "title": "جُعبة ", "question_id": "7", "isRight": "0" }, { "id": "27", "title": "جِعبة ", "question_id": "7", "isRight": "0" }, { "id": "28", "title": "جُعُبة", "question_id": "7", "isRight": "0" }] }, { "question": { "id": "20", "title": "_____________ نظرتُ إليه ", "level": "easy", "mark": null }, "answers": [{ "id": "80", "title": "خُلَسَةً", "question_id": "20", "isRight": "0" }, { "id": "77", "title": "خُلْسَةً", "question_id": "20", "isRight": "1" }, { "id": "78", "title": "خِلْسَةً", "question_id": "20", "isRight": "0" }, { "id": "79", "title": "خَلْسَةً", "question_id": "20", "isRight": "0" }] }, { "question": { "id": "3", "title": "الصواب", "level": "easy", "mark": null }, "answers": [{ "id": "10", "title": "الحَيَاه", "question_id": "3", "isRight": "0" }, { "id": "12", "title": "life", "question_id": "3", "isRight": "0" }, { "id": "11", "title": "الحَيَات", "question_id": "3", "isRight": "0" }, { "id": "9", "title": "الحَيَاة", "question_id": "3", "isRight": "1" }] }, { "question": { "id": "2", "title": "_____________ لم أفعل ", "level": "easy", "mark": null }, "answers": [{ "id": "8", "title": "شيء", "question_id": "2", "isRight": "0" }, { "id": "5", "title": "شيئًا", "question_id": "2", "isRight": "1" }, { "id": "7", "title": "شئًا", "question_id": "2", "isRight": "0" }, { "id": "6", "title": "شيءًا", "question_id": "2", "isRight": "0" }] }, { "question": { "id": "8", "title": "المؤسسة مجتمعون _____________ ", "level": "easy", "mark": null }, "answers": [{ "id": "30", "title": "مدراء", "question_id": "8", "isRight": "0" }, { "id": "29", "title": "مديرو", "question_id": "8", "isRight": "1" }, { "id": "31", "title": "مديري", "question_id": "8", "isRight": "0" }, { "id": "32", "title": "مُدُر", "question_id": "8", "isRight": "0" }] }, { "question": { "id": "10", "title": "أنتم", "level": "easy", "mark": null }, "answers": [{ "id": "39", "title": "مجتهدات", "question_id": "10", "isRight": "0" }, { "id": "38", "title": "مجتهدان", "question_id": "10", "isRight": "0" }, { "id": "37", "title": "مجتهدون", "question_id": "10", "isRight": "1" }, { "id": "40", "title": "مجتهدن", "question_id": "10", "isRight": "0" }] }, { "question": { "id": "16", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "62", "title": "لم أقُولْ", "question_id": "16", "isRight": "0" }, { "id": "64", "title": "لن أقولُ", "question_id": "16", "isRight": "0" }, { "id": "63", "title": "لن أقُلْ", "question_id": "16", "isRight": "0" }, { "id": "61", "title": "لم أقُلْ ", "question_id": "16", "isRight": "1" }] }, { "question": { "id": "19", "title": "مفرد أشياء", "level": "easy", "mark": null }, "answers": [{ "id": "73", "title": "شيء", "question_id": "19", "isRight": "1" }, { "id": "76", "title": "شايء", "question_id": "19", "isRight": "0" }, { "id": "75", "title": "شيئ", "question_id": "19", "isRight": "0" }, { "id": "74", "title": "شئ", "question_id": "19", "isRight": "0" }] }, { "question": { "id": "1", "title": "جمع \"سهم\" ", "level": "easy", "mark": null }, "answers": [{ "id": "3", "title": "أَسْهُم", "question_id": "1", "isRight": "0" }, { "id": "4", "title": "سُهُم", "question_id": "1", "isRight": "0" }, { "id": "1", "title": "سِهَام", "question_id": "1", "isRight": "1" }, { "id": "2", "title": "سُهُوم", "question_id": "1", "isRight": "0" }] }, { "question": { "id": "11", "title": "_____________ بينهما علاقة ", "level": "easy", "mark": null }, "answers": [{ "id": "44", "title": "حُمِّيَّة", "question_id": "11", "isRight": "0" }, { "id": "42", "title": "حَمِيمَة", "question_id": "11", "isRight": "0" }, { "id": "41", "title": "حَمِيمِيَّة", "question_id": "11", "isRight": "1" }, { "id": "43", "title": "حَمَمِيَّة", "question_id": "11", "isRight": "0" }] }, { "question": { "id": "14", "title": "شربتُ", "level": "easy", "mark": null }, "answers": [{ "id": "55", "title": "الحُساء", "question_id": "14", "isRight": "0" }, { "id": "54", "title": "الحِساء", "question_id": "14", "isRight": "0" }, { "id": "56", "title": "الحسّاء", "question_id": "14", "isRight": "0" }, { "id": "53", "title": "الحَساء", "question_id": "14", "isRight": "1" }] }, { "question": { "id": "13", "title": "حصلتُ على _____________ من العمل", "level": "easy", "mark": null }, "answers": [{ "id": "49", "title": "إجازة", "question_id": "13", "isRight": "1" }, { "id": "51", "title": "إيجازة", "question_id": "13", "isRight": "0" }, { "id": "50", "title": "أجازة", "question_id": "13", "isRight": "0" }, { "id": "52", "title": "إجازًا", "question_id": "13", "isRight": "0" }] }, { "question": { "id": "15", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "57", "title": "عمر بن الخطاب", "question_id": "15", "isRight": "1" }, { "id": "58", "title": "عمر ابن الخطاب", "question_id": "15", "isRight": "0" }, { "id": "60", "title": "عمر أبن الخطاب", "question_id": "15", "isRight": "0" }, { "id": "59", "title": "عمر إبن الخطاب", "question_id": "15", "isRight": "0" }] }, { "question": { "id": "6", "title": "أخي", "level": "easy", "mark": null }, "answers": [{ "id": "24", "title": "يفتقرني", "question_id": "6", "isRight": "0" }, { "id": "21", "title": "يفتقدني", "question_id": "6", "isRight": "1" }, { "id": "22", "title": "يفتقرّ إليّ", "question_id": "6", "isRight": "0" }, { "id": "23", "title": "يفتقد إليّ", "question_id": "6", "isRight": "0" }] }, { "question": { "id": "17", "title": "العبارة الصحيحة", "level": "easy", "mark": null }, "answers": [{ "id": "68", "title": "هذا مستشفى كبيرة", "question_id": "17", "isRight": "0" }, { "id": "67", "title": "هذه مستشفى كبير", "question_id": "17", "isRight": "0" }, { "id": "65", "title": "هذا مستشفى كبير", "question_id": "17", "isRight": "1" }, { "id": "66", "title": "هذه مستشفى كبيرة", "question_id": "17", "isRight": "0" }] }]
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }

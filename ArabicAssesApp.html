@@ -225,9 +225,13 @@
 				background-color: #429393;
 			}
 
-			a {
-				color: #429393;
-				text-decoration: underline
+			.js-article-text h5 {
+				color: #444444
+			}
+
+			.js-article-text a {
+				color: #429393 !important;
+				text-decoration: underline !important
 			}
 
 			body {
@@ -259,7 +263,18 @@
 			}
 
 			.js-question-text {
-				text-align: center;
+				display: flex;
+				flex-direction: row-reverse;
+				justify-content: center;
+				direction: ltr;
+			}
+
+			.english-main-con .js-choices .js-disabled-choice label.js-right-choice:after {
+				padding-right: 5px;
+			}
+
+			.english-main-con .js-choices .js-disabled-choice label.js-wrong-choice:after {
+				padding-right: 5px;
 			}
 
 			.btn-english-start {
@@ -268,6 +283,10 @@
 
 			.js-nav-box {
 				width: 100%;
+			}
+
+			.result-ring.english-result-ring .js-result-message {
+				font-size: 0.45em;
 			}
 
 			.col-sm-6 {
@@ -287,6 +306,11 @@
 
 			button {
 				margin-top: 25px;
+			}
+
+			.lds-facebook {
+				right: -5px;
+				left: unset;
 			}
 		</style>
 
@@ -308,23 +332,23 @@
 								<!-- <h3 class="home-header-arabic prime-color">اختبار قياس الكفاءة باستعمال اللغة الانكليزية -->
 								<!-- </h3> -->
 								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
-								<p class="home-header-arabic-desc" style="direction: rtl;">يتكون من ١٠٠ سؤال من متعدد
-									متنوعين بالصعوبة, وعند
-									الانتهاء من الاختبار سنقدم لكم نصائح لتطوير لغتكم بناءً على درجة التقييم التي
-									ستحصلون عليها.<br>
-									الاختبار متجدد، أي أنه يتم عرض أسئلة جديدة دائماً عند إعادة الاختبار.
-									<br>
-									ليس هناك تقييد بالوقت، وإنما يتم عرض الوقت الذي استغرقتموه في النهاية.</p>
-								<button type="submit" class="btn-test btn-asses-submit btn-english-start">
-									<span class="questions-loading">
-										<div class="lds-facebook">
-											<div></div>
-											<div></div>
-											<div></div>
-										</div>
-										Please wait until we get your questions ready...
-									</span>
-								</button>
+								<p class="home-header-arabic-desc" style="direction: rtl;">أعزاءنا متابعين Look in MENA
+									ما رأيكم بالحصول على اختبار باللغة العربية؟ قد تعتقدون أن ذلك غير متوفر لكننا الآن
+									نتيح لكم هذه الفرصة عبر منصتنا!<br>
+									وضع فريق لوك إن مينا هذا الاختبار لأجلكم وذلك لكونه غير متوفر عبر منصات أخرى وقد
+									استهدفنا من خلاله استخدام مصطلحات شائعة الاستخدام وابتعدنا قدر الإمكان عن الأسئلة
+									التي قد تبدو بعيدة عن الاستخدام العام ومن ثَمَّ نرجو أن نحقق لكم فوائد عملية كما
+									نفعل وكما تنتظروه منا دومًا.
+									<button type="submit" class="btn-test btn-asses-submit btn-english-start">
+										<span class="questions-loading">
+											<div class="lds-facebook">
+												<div></div>
+												<div></div>
+												<div></div>
+											</div>
+											انتظر قليلا ريثما نجهز لك الأسئلة...
+										</span>
+									</button>
 							</div>
 
 						</div>
