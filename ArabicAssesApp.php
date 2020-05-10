@@ -79,7 +79,10 @@
 			}
 
 			.js-question-text {
-				text-align: center;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				direction: rtl;
 			}
 
 			.btn-english-start {

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  *      CUSTOM.CSS
  *
@@ -11101,118 +11101,45 @@ blockquote footer img {
 
 /* share button*/
 
-@import '//codepen.io/chrisdothtml/pen/ojLzJK.css';
+.share-container {
+    display: inline-block;
+    background-color: white;
+    box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+}
 
-.social-btns .btn,
-.social-btns .btn:before,
-.social-btns .btn .fa {
+.social-btns .btn {
     transition: all 0.35s;
     transition-timing-function: cubic-bezier(0.31, -0.105, 0.43, 1.59);
 }
 
-.social-btns .btn:before {
-    top: 90%;
-    left: -110%;
-}
-
-.social-btns .btn .fa {
-    -webkit-transform: scale(0.8);
-    transform: scale(0.8);
-}
-
-.social-btns .btn.facebook:before {
-    background-color: #3b5998;
-}
-
-.social-btns .btn.facebook .fa {
-    color: #3b5998;
-}
-
-.social-btns .btn.twitter:before {
-    background-color: #3cf;
-}
-
-.social-btns .btn.twitter .fa {
-    color: #3cf;
-}
-
-.social-btns .btn.google:before {
-    background-color: #dc4a38;
-}
-
-.social-btns .btn.google .fa {
-    color: #dc4a38;
-}
-
-.social-btns .btn.whatsapp:before {
-    background-color: #34af23;
-}
-
-.social-btns .btn.whatsapp .fa {
-    color: #34af23;
-}
-
-.social-btns .btn.linkedin:before {
-    background-color: #0077B5;
-}
-
-.social-btns .btn.linkedin .fa {
-    color: #0077B5;
-}
-
-.social-btns .btn.telegram:before {
-    background-color: #00aff0;
-}
-
-.social-btns .btn.telegram .fa {
-    color: #00aff0;
-}
-
-.social-btns .btn:focus:before,
-.social-btns .btn:hover:before {
-    top: -10%;
-    left: -10%;
-}
-
-.social-btns .btn:focus .fa,
-.social-btns .btn:hover .fa {
-    color: #fff;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
-
 .social-btns {
-    /* height: 90px; */
     margin: auto;
     font-size: 0;
 }
 
 .social-btns .btn {
     display: inline-block;
-    background-color: #fff;
-    width: 95px;
-    height: 50px;
-    line-height: 90px;
-    margin: 5px;
+    background-color: transparent;
+    width: 55px;
+    margin: 5px 8px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.1);
     opacity: 0.99;
+    padding: 0;
 }
 
-.social-btns .btn:before {
-    content: '';
-    width: 176%;
-    height: 180%;
-    position: absolute;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(30deg);
+@media screen and (max-width: 600px) {
+    .social-btns .btn {
+        width: 45px;
+    }
 }
 
-.social-btns .btn .fa {
-    font-size: 38px;
-    vertical-align: middle;
+.social-btns .btn:hover {
+    border-radius: 0;
+    transform: rotate(14deg);
+    box-shadow: none;
 }
 
 .f-13 {
@@ -13027,8 +12954,7 @@ input:checked+.slide-container .nav label {
 
 
 .js-feedback-img {
-
-    height: 90px;
+    height: 75px;
     margin-top: -50px;
 }
 
@@ -13297,11 +13223,6 @@ a {
     text-align: left;
 }
 
-.arabic_view {
-    direction: rtl;
-    text-align: right;
-}
-
 .english-test-main {
     margin: 40px 0
 }
@@ -13528,10 +13449,6 @@ a {
     margin-top: 110px;
 }
 
-.arabic_view .js-container.english-main-con {
-    direction: rtl;
-}
-
 .english-main-con .js-questions-content {
     width: 100%;
 }
@@ -13660,15 +13577,23 @@ a {
     color: #fff !important;
 }
 
-.result-ring.english-result-ring .js-result-message {
+.result-ring.english-result-ring .js-result-message,
+.result-ring.arabic-result-ring .js-result-message {
     font-weight: 800;
-    fill: var(--tertiary-color);
     font-size: 0.5em;
     font-family: inherit;
 }
 
 .result-ring.english-result-ring .ring {
     stroke: rgb(104, 191, 250);
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: butt;
+    animation: progress 1s ease-out forwards;
+}
+
+.result-ring.arabic-result-ring .ring {
+    stroke: #0f4b81;
     fill: none;
     stroke-width: 2.8;
     stroke-linecap: butt;
@@ -13908,4 +13833,13 @@ ul.progressbar li.current:before {
     .homepage-logo {
         width: 30%;
     }
+}
+
+.arabic_view {
+    direction: rtl;
+    text-align: right;
+}
+
+.arabic_view .js-container.english-main-con {
+    direction: rtl;
 }
