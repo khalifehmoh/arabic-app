@@ -13577,12 +13577,17 @@ a {
     color: #fff !important;
 }
 
-.result-ring.english-result-ring .js-result-message,
-.result-ring.arabic-result-ring .js-result-message {
+.result-ring.english-result-ring .js-result-message {
     font-weight: 800;
     font-size: 0.5em;
     font-family: inherit;
 }
+
+.result-ring.arabic-result-ring .js-result-message {
+    font-weight: 800;
+    font-family: inherit;
+}
+
 
 .result-ring.english-result-ring .ring {
     stroke: rgb(104, 191, 250);
@@ -13842,4 +13847,41 @@ ul.progressbar li.current:before {
 
 .arabic_view .js-container.english-main-con {
     direction: rtl;
+}
+
+/* .team-section:not() {
+    margin-top: 60px;
+} */
+
+.btn-floating-wrong {
+    z-index: 99999;
+    border-radius: 25px;
+    position: fixed;
+    bottom: 50px;
+    left: 40px;
+}
+
+.vert-move {
+    -webkit-animation: mover 1s infinite alternate;
+    animation: mover 1s infinite alternate;
+}
+
+@-webkit-keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
 }

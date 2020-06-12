@@ -243,10 +243,11 @@ var renderResult = function () {
         <br>
      </div>
     </div>
-    <div class="js-wrong-questions" style="text-align:center">
+ 
+    <div class="js-wrong-questions" id="wrong-questions" style="text-align:center">
       <div class="container">
         <!-- panel -->
-        <div class="panel-group" id="accordion-2">
+        <div class="panel-group" id="accordion">
             <div class="panel" style="background: transparent">
               <div class="panel-heading" style="width: 275px;
               margin: 0 auto;position: relative;
@@ -272,6 +273,9 @@ var renderResult = function () {
     </div>`
   $(".js-container").html(result);
 }
+{/* <button id="floating-btn" class="btn-floating-wrong vert-move">
+الإجابات الخاطئة ▼
+</button> */}
 // src="../wp-content/themes/lookinmena/assets/images/test-grants2.svg"
 var renderMistakes = function () {
   let wrongQuestionsDOM = '';
@@ -392,6 +396,12 @@ function handleChoiceCheck() {
   });
 }
 
+function handleWrongAnsFloatClick() {
+  $('.js-container').on('click', '.btn-floating-wrong', function () {
+    document.getElementById('accordion').scrollIntoView();
+  });
+}
+
 function handleViewResult() {
   $(".js-container").on("click", ".js-view-result", function (event) {
     setStartEndTime('end');
@@ -399,25 +409,25 @@ function handleViewResult() {
     $('.js-question-page').fadeOut('slow', function () {
       generateFeedbackSummary();
       renderResult();
-      // $('#steps').progressbar({ steps: setResultStep() });
       getQuestionsDetails('wrongQuestions');
       renderMistakes();
       animateResult();
     })
 
+
   })
 }
 
-// function setResultStep() {
-//   let levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-//   let resultLevel = state.result;
-//   levels.forEach((level, index) => {
-//     if (level === resultLevel) {
-//       levels[index] = '@' + level
-//     }
-//   });
-//   return levels
-// }
+
+var isInViewport = function (elem) {
+  var bounding = elem.getBoundingClientRect();
+  return (
+    bounding.top >= 0 &&
+    bounding.left >= 0 &&
+    bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
 
 function handleProgressBar() {
   (function ($) {
@@ -614,6 +624,7 @@ function animateResult() {
   $("#steps").hide();
   $("#result-level-text").hide();
   $(".js-wrong-questions").hide();
+  $(".btn-floating-wrong").hide();
   $(".js-container").animate({
     height: '300px'
   })
@@ -637,6 +648,14 @@ function animateResult() {
         $(".js-feedback-summary-header").fadeIn(200, function () {
           $(".js-feedback-summary-list").fadeIn(500).slideDown(500);
           $(".js-wrong-questions").fadeIn(600);
+          $(".btn-floating-wrong").fadeIn(600);
+          const btnFloating = document.getElementById('floating-btn');
+          const wrongQuestions = document.getElementById('wrong-questions');
+          $(window).on('resize scroll', function () {
+            if (isInViewport(wrongQuestions)) {
+              btnFloating.style.display = 'none'
+            }
+          })
         });
 
       });
@@ -742,6 +761,7 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 function get_data() {
   var data = JSON.parse(globalData);
   state.questionsData = data;
+
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }
@@ -753,5 +773,6 @@ $(function () {
   handleSubmitAnswers();
   handleViewResult();
   handleProgressBar();
+  handleWrongAnsFloatClick();
 })
 
