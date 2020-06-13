@@ -15,7 +15,7 @@ var state = {
   result: '',
   levelText: '',
   wrongAnswersArr: [],
-  renderedWrongAnswersArr: []
+  renderedWrongAnswersArr: [],
 }
 
 //state modification functions
@@ -172,8 +172,6 @@ var renderQuestion = function (state) {
     </div>`
   $(".js-questions-content").html(questionsRender);
   clearPageQuestions();
-  // $('#bar1').calculateFill(state.lastRenderedQuestion - 10);
-
 }
 
 
@@ -201,7 +199,7 @@ var renderResult = function () {
   else if (totalMark >= 7 && totalMark < 12) {
     message = "متوسط";
   }
-  else if (totalMark < 6 && totalMark >= 0) {
+  else if (totalMark <= 6 && totalMark >= 0) {
     message = "ضعيف";
   }
   addResultMessage(message);
@@ -243,24 +241,26 @@ var renderResult = function () {
         <br>
      </div>
     </div>
- 
+     <button id="floating-btn" class="btn-floating-wrong vert-move">
+      الإجابات الخاطئة
+    </button>  
     <div class="js-wrong-questions" id="wrong-questions" style="text-align:center">
       <div class="container">
         <!-- panel -->
-        <div class="panel-group" id="accordion">
+        <div class="panel-group" id="accordion-2">
             <div class="panel" style="background: transparent">
-              <div class="panel-heading" style="width: 275px;
+              <div class="panel-heading" style="width: 250px;
               margin: 0 auto;position: relative;
               bottom: -20px;
               z-index: 999;">
                 <h4 class="panel-title"> <a style="direction:rtl;    height: 45px;
                 background: var(--medium-grey-color);color:white" data-toggle="collapse"
                     href="#collapse1"
-                    class="collapsed" aria-expanded="false">عرض إجاباتك الخاطئة</a>
+                     aria-expanded="true">الإجابات الخاطئة</a>
                 </h4>
               </div>
-              <div id="collapse1" class="panel-collapse collapse"
-                aria-expanded="false">
+              <div id="collapse1" class="panel-collapse"
+                aria-expanded="true">
                 <div class="panel-body" style="background-color: #fff;
                 box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
                 border-radius: 25px;">
@@ -273,9 +273,7 @@ var renderResult = function () {
     </div>`
   $(".js-container").html(result);
 }
-{/* <button id="floating-btn" class="btn-floating-wrong vert-move">
-الإجابات الخاطئة ▼
-</button> */}
+
 // src="../wp-content/themes/lookinmena/assets/images/test-grants2.svg"
 var renderMistakes = function () {
   let wrongQuestionsDOM = '';
@@ -398,7 +396,9 @@ function handleChoiceCheck() {
 
 function handleWrongAnsFloatClick() {
   $('.js-container').on('click', '.btn-floating-wrong', function () {
-    document.getElementById('accordion').scrollIntoView();
+    $('.btn-floating-wrong').hide();
+    $(".js-wrong-questions").fadeIn(600);
+    document.getElementById('wrong-questions').scrollIntoView();
   });
 }
 
@@ -413,21 +413,8 @@ function handleViewResult() {
       renderMistakes();
       animateResult();
     })
-
-
   })
 }
-
-
-var isInViewport = function (elem) {
-  var bounding = elem.getBoundingClientRect();
-  return (
-    bounding.top >= 0 &&
-    bounding.left >= 0 &&
-    bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-};
 
 function handleProgressBar() {
   (function ($) {
@@ -601,17 +588,6 @@ function handleProgressBar() {
   })(jQuery);
 }
 
-
-// function handleViewResult() {
-//   $(".js-container").on("click", ".js-view-result", function (event) {
-//     $('.js-question-page').fadeOut('slow', function () {
-//       renderResult();
-//       animateResult();
-//     })
-
-//   })
-// }
-
 function animateResult() {
   $(".js-feedback-header").hide()
   $(".result-ring").hide();
@@ -647,15 +623,8 @@ function animateResult() {
       $(".js-feedback-img").fadeIn(200, function () {
         $(".js-feedback-summary-header").fadeIn(200, function () {
           $(".js-feedback-summary-list").fadeIn(500).slideDown(500);
-          $(".js-wrong-questions").fadeIn(600);
+          // $(".js-wrong-questions").fadeIn(600);
           $(".btn-floating-wrong").fadeIn(600);
-          const btnFloating = document.getElementById('floating-btn');
-          const wrongQuestions = document.getElementById('wrong-questions');
-          $(window).on('resize scroll', function () {
-            if (isInViewport(wrongQuestions)) {
-              btnFloating.style.display = 'none'
-            }
-          })
         });
 
       });
@@ -761,7 +730,6 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 function get_data() {
   var data = JSON.parse(globalData);
   state.questionsData = data;
-
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }
