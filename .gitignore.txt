@@ -1,2 +1,3 @@
 ./arabic-assesment-workspace.code-workspace
 ./add-files
+node_modules/
