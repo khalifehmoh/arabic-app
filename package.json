@@ -18,7 +18,7 @@
   "homepage": "https://github.com/khalifehmoh/arabic-app#readme",
   "dependencies": {
     "@types/node": "^14.0.13",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "typescript": "^3.9.5"
   }
 }
